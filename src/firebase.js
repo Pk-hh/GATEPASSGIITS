@@ -5,13 +5,13 @@ import { getAnalytics, isSupported } from "firebase/analytics";
 
 // User's Production Firebase Configuration (Project: gatepassgiits)
 export const firebaseConfig = {
-  apiKey: "AIzaSyAs6Jfu-iL1t7xj_PyhmvXeIBi_rwfXx_4",
-  authDomain: "gatepassgiits.firebaseapp.com",
-  projectId: "gatepassgiits",
-  storageBucket: "gatepassgiits.firebasestorage.app",
-  messagingSenderId: "59515827881",
-  appId: "1:59515827881:web:35baf76bd010885f1d1bb8",
-  measurementId: "G-DWKYGCEKXP"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "AIzaSyAs6Jfu-iL1t7xj_PyhmvXeIBi_rwfXx_4",
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "gatepassgiits.firebaseapp.com",
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID || "gatepassgiits",
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET || "gatepassgiits.firebasestorage.app",
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "59515827881",
+  appId: import.meta.env.VITE_FIREBASE_APP_ID || "1:59515827881:web:35baf76bd010885f1d1bb8",
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID || "G-DWKYGCEKXP"
 };
 
 export const getActiveFirebaseConfig = () => firebaseConfig;
