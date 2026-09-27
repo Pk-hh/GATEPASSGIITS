@@ -1,0 +1,26 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // USERS COLLECTION
+    // Allows staff authentication, account updates by Admin, and profile reads
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // APPLICATIONS COLLECTION
+    // Public Student Portal allows students to submit and track leave applications without login.
+    // Class Teachers, HODs, Security Guards, and Principal can review and update application status.
+    match /applications/{appId} {
+      allow read, create, update: if true;
+      allow delete: if request.auth != null;
+    }
+
+    // LOGS COLLECTION
+    // Security guards log entry/exit movements when scanning QR passes.
+    match /logs/{logId} {
+      allow read, create, update: if true;
+    }
+  }
+}
