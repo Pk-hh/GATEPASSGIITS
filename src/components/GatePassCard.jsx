@@ -25,13 +25,35 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
         scale: 2,
         backgroundColor: "#ffffff",
         useCORS: true,
-        allowTaint: true,
+        allowTaint: false,
         logging: false,
-        imageTimeout: 15000,
-        windowWidth: 800
+        scrollX: 0,
+        scrollY: 0,
+        x: 0,
+        y: 0,
+        width: element.offsetWidth,
+        height: element.offsetHeight,
+        onclone: (clonedDoc) => {
+          const clonedEl = clonedDoc.getElementById("printable-gate-pass");
+          if (clonedEl) {
+            clonedEl.style.position = "static";
+            clonedEl.style.transform = "none";
+            clonedEl.style.margin = "0 auto";
+            clonedEl.style.visibility = "visible";
+            clonedEl.style.opacity = "1";
+            clonedEl.style.boxShadow = "none";
+            clonedEl.style.background = "#ffffff";
+            clonedEl.style.display = "block";
+          }
+        }
       });
 
-      const imgData = canvas.toDataURL("image/png");
+      const imgData = canvas.toDataURL("image/png", 1.0);
+
+      if (!imgData || imgData === "data:," || imgData.length < 1000) {
+        throw new Error("Generated PDF canvas is empty.");
+      }
+
       const pdf = new jsPDF({
         orientation: "portrait",
         unit: "mm",
@@ -44,11 +66,10 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
       const contentHeight = (canvas.height * contentWidth) / canvas.width;
 
       pdf.addImage(imgData, "PNG", margin, margin, contentWidth, contentHeight);
-      pdf.save(`GatePass_${app.gatePassId || app.id}.pdf`);
+      pdf.save(`GIITS_GatePass_${app.gatePassId || app.rollNumber || app.id}.pdf`);
     } catch (err) {
       console.error("PDF Export Error:", err);
-      // Fallback if canvas capture fails: use print dialog
-      alert("PDF direct download fallback triggered. Printing gate pass...");
+      alert("Opening print dialog for PDF export...");
       window.print();
     } finally {
       setIsGeneratingPDF(false);
