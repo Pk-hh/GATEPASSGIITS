@@ -240,10 +240,10 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/80 backdrop-blur-xs p-2 sm:p-4 flex items-start justify-center min-h-screen">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/80 backdrop-blur-xs p-3 sm:p-6 flex items-start justify-center min-h-full">
       
       {/* Outer Card Container with rounded corners & overflow hidden */}
-      <div className="relative max-w-lg w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-stone-200/90 my-auto sm:my-6 flex flex-col">
+      <div className="relative max-w-lg w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-stone-200/90 my-4 sm:my-8 flex flex-col z-10">
         
         {/* Sticky Mobile-Friendly Control Top Bar */}
         <div className="sticky top-0 z-30 bg-[#702424] text-white p-3 sm:p-4 border-b border-[#5A1C1C] flex items-center justify-between gap-2 shadow-md shrink-0 no-print">
