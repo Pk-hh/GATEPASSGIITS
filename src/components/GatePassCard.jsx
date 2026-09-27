@@ -18,34 +18,34 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
     if (!cardRef.current || isGeneratingPDF) return;
     
     setIsGeneratingPDF(true);
+    let clone = null;
     try {
-      const element = cardRef.current;
+      const original = cardRef.current;
       
-      const canvas = await html2canvas(element, {
+      // Clone the printable gate pass node and mount to document body at (0,0)
+      clone = original.cloneNode(true);
+      clone.style.position = "fixed";
+      clone.style.left = "0px";
+      clone.style.top = "0px";
+      clone.style.width = "650px";
+      clone.style.zIndex = "-99999";
+      clone.style.background = "#ffffff";
+      clone.style.margin = "0";
+      clone.style.padding = "24px";
+      clone.style.opacity = "1";
+      clone.style.visibility = "visible";
+      clone.style.pointerEvents = "none";
+      document.body.appendChild(clone);
+
+      // Brief delay to allow browser layout rendering
+      await new Promise(resolve => setTimeout(resolve, 150));
+
+      const canvas = await html2canvas(clone, {
         scale: 2,
         backgroundColor: "#ffffff",
         useCORS: true,
         allowTaint: false,
-        logging: false,
-        scrollX: 0,
-        scrollY: 0,
-        x: 0,
-        y: 0,
-        width: element.offsetWidth,
-        height: element.offsetHeight,
-        onclone: (clonedDoc) => {
-          const clonedEl = clonedDoc.getElementById("printable-gate-pass");
-          if (clonedEl) {
-            clonedEl.style.position = "static";
-            clonedEl.style.transform = "none";
-            clonedEl.style.margin = "0 auto";
-            clonedEl.style.visibility = "visible";
-            clonedEl.style.opacity = "1";
-            clonedEl.style.boxShadow = "none";
-            clonedEl.style.background = "#ffffff";
-            clonedEl.style.display = "block";
-          }
-        }
+        logging: false
       });
 
       const imgData = canvas.toDataURL("image/png", 1.0);
@@ -72,6 +72,9 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
       alert("Opening print dialog for PDF export...");
       window.print();
     } finally {
+      if (clone && clone.parentNode) {
+        clone.parentNode.removeChild(clone);
+      }
       setIsGeneratingPDF(false);
     }
   };
