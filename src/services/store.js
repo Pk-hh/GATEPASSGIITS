@@ -249,8 +249,45 @@ try {
 
 initFirestoreSync();
 
+export const isAppOlderThan24Hours = (app) => {
+  if (!app) return false;
+  const now = Date.now();
+  const TWENTY_FOUR_HOURS_MS = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+  if (app.createdAt) {
+    const createdTime = new Date(app.createdAt).getTime();
+    if (!isNaN(createdTime)) {
+      return (now - createdTime) >= TWENTY_FOUR_HOURS_MS;
+    }
+  }
+
+  if (app.leaveDate) {
+    const leaveTime = new Date(app.leaveDate).getTime();
+    if (!isNaN(leaveTime)) {
+      return (now - leaveTime) >= (TWENTY_FOUR_HOURS_MS + 86400000);
+    }
+  }
+
+  return false;
+};
+
+export const cleanExpired24hApplications = () => {
+  const initialCount = memoryApplications.length;
+  memoryApplications = memoryApplications.filter(app => !isAppOlderThan24Hours(app));
+  
+  if (memoryApplications.length !== initialCount) {
+    try {
+      localStorage.setItem("firestore_cached_apps", JSON.stringify(memoryApplications));
+    } catch (e) {}
+  }
+  return memoryApplications;
+};
+
 export const getUsers = () => memoryUsers;
-export const getApplications = () => memoryApplications;
+export const getApplications = () => {
+  cleanExpired24hApplications();
+  return memoryApplications;
+};
 export const getGateLogs = () => memoryLogs;
 
 export const generateApplicationId = () => {
@@ -321,11 +358,13 @@ export const createLeaveApplication = async (data) => {
 
 export const getStudentApplicationsByRoll = (rollNumber) => {
   if (!rollNumber) return [];
+  cleanExpired24hApplications();
   const q = rollNumber.trim().toLowerCase();
   return memoryApplications.filter(a => 
-    a.rollNumber.toLowerCase() === q || 
-    a.id.toLowerCase() === q || 
-    (a.gatePassId && a.gatePassId.toLowerCase() === q)
+    !isAppOlderThan24Hours(a) &&
+    ((a.rollNumber && a.rollNumber.toLowerCase() === q) || 
+     (a.id && a.id.toLowerCase() === q) || 
+     (a.gatePassId && a.gatePassId.toLowerCase() === q))
   );
 };
 
