@@ -22,7 +22,10 @@ import {
   AlertTriangle,
   Download,
   Upload,
-  RefreshCw
+  RefreshCw,
+  Aperture,
+  Sparkles,
+  Zap
 } from "lucide-react";
 import { Html5Qrcode } from "html5-qrcode";
 
@@ -288,10 +291,19 @@ export const SecurityDashboard = () => {
           <div className="flex items-center gap-3">
             <button
               onClick={toggleScanner}
-              className="px-4 py-2.5 bg-[#5A1C1C] hover:bg-[#852C2C] text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center gap-2 transition-colors"
+              className={`px-5 py-3 rounded-2xl font-black text-xs shadow-lg flex items-center gap-2.5 transition-all duration-300 active:scale-95 border ${
+                scannerActive
+                  ? "bg-gradient-to-r from-red-600 to-rose-700 text-white border-red-400/50 shadow-red-900/30 hover:from-red-700 hover:to-rose-800"
+                  : "bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-stone-950 border-amber-300/60 shadow-amber-500/30 hover:from-amber-300 hover:to-amber-500 hover:shadow-amber-500/50"
+              }`}
             >
-              <Camera className="w-4 h-4 text-amber-300" />
-              {scannerActive ? "Stop Camera Scanner" : "Launch Camera QR Scanner"}
+              <div className={`p-1.5 rounded-xl ${scannerActive ? "bg-white/20" : "bg-stone-950/15"}`}>
+                <Camera className={`w-4 h-4 ${scannerActive ? "text-white animate-pulse" : "text-stone-950"}`} />
+              </div>
+              <span className="tracking-wide">
+                {scannerActive ? "STOP CAMERA SCANNER" : "LAUNCH CAMERA QR SCANNER"}
+              </span>
+              <span className={`w-2.5 h-2.5 rounded-full ${scannerActive ? "bg-red-300 animate-ping" : "bg-stone-950 animate-pulse"}`}></span>
             </button>
           </div>
         </div>
@@ -323,46 +335,77 @@ export const SecurityDashboard = () => {
               Digital Gate Pass Verification
             </h3>
             
-            {/* Native Photo / Upload QR Fallback Button */}
-            <div>
-              <input
-                type="file"
-                ref={fileInputRef}
-                accept="image/*"
-                capture="environment"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
+            {/* Hidden Input for Native Camera / Gallery Scan */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              accept="image/*"
+              capture="environment"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+          </div>
+
+          {/* Enhanced Camera Control Action Bar */}
+          <div className="bg-gradient-to-r from-amber-500/10 via-stone-50 to-stone-100 p-4 rounded-2xl border border-amber-200/80 shadow-2xs space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <div className={`w-2.5 h-2.5 rounded-full ${scannerActive ? "bg-emerald-500 animate-ping" : "bg-amber-600 animate-pulse"}`}></div>
+                <h4 className="text-xs font-black text-[#702424] uppercase tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-amber-600" />
+                  Camera Scanner Controls
+                </h4>
+              </div>
+              <span className="text-[10px] font-extrabold text-[#702424] bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-200">
+                {scannerActive ? "STREAM ACTIVE" : "READY TO SCAN"}
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* Button 1: Live HD Camera Toggle */}
+              <button
+                type="button"
+                onClick={toggleScanner}
+                className={`py-3 px-4 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-md transition-all duration-200 active:scale-95 ${
+                  scannerActive
+                    ? "bg-stone-900 text-white hover:bg-stone-800 ring-2 ring-stone-700"
+                    : "bg-[#702424] hover:bg-[#581A1A] text-white shadow-[#702424]/25 hover:shadow-lg"
+                }`}
+              >
+                <Aperture className={`w-4 h-4 ${scannerActive ? "text-rose-400 animate-spin" : "text-amber-300"}`} />
+                <span>{scannerActive ? "Stop Live Camera" : "Open Live HD Scanner"}</span>
+              </button>
+
+              {/* Button 2: Native Camera Snap / Gallery Upload */}
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="px-3 py-1.5 bg-[#FFF3E4] hover:bg-[#FFE6C9] text-[#702424] font-extrabold text-xs rounded-xl border border-amber-200 flex items-center gap-1.5 transition-colors"
-                title="Use native camera to take photo or pick QR from gallery"
+                className="py-3 px-4 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-stone-950 font-black text-xs rounded-xl shadow-md shadow-amber-500/20 flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 border border-amber-300/80"
               >
-                <Upload className="w-3.5 h-3.5 text-[#702424]" />
-                Take Photo / Upload QR
+                <Camera className="w-4 h-4 text-stone-950" />
+                <span>Snap Photo / Upload QR</span>
               </button>
             </div>
           </div>
 
           {cameraError && (
-            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-900 font-bold flex items-start gap-2">
+            <div className="p-3.5 bg-red-50 border border-red-200 rounded-2xl text-xs text-red-900 font-bold flex items-start gap-2.5 shadow-2xs">
               <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
               <div>
                 <p>{cameraError}</p>
                 <p className="text-[11px] text-red-700 mt-1 font-normal">
-                  Tip: On Native mobile apps, tap <strong>"Take Photo / Upload QR"</strong> above to open your native device camera directly.
+                  Tip: On Native mobile apps, tap <strong>"Snap Photo / Upload QR"</strong> above to open your native device camera directly.
                 </p>
               </div>
             </div>
           )}
 
           {scannerActive && (
-            <div className="p-4 bg-stone-900 rounded-2xl border border-stone-700 overflow-hidden relative min-h-[260px] flex flex-col items-center justify-center">
+            <div className="p-4 bg-stone-900 rounded-2xl border border-stone-700 overflow-hidden relative min-h-[260px] flex flex-col items-center justify-center shadow-inner">
               {isCameraLoading && (
-                <div className="absolute inset-0 bg-stone-900/90 z-10 flex flex-col items-center justify-center text-white text-xs font-bold gap-2">
-                  <RefreshCw className="w-6 h-6 animate-spin text-amber-400" />
-                  <span>Accessing native camera stream...</span>
+                <div className="absolute inset-0 bg-stone-900/95 z-10 flex flex-col items-center justify-center text-white text-xs font-bold gap-2.5">
+                  <RefreshCw className="w-7 h-7 animate-spin text-amber-400" />
+                  <span className="tracking-wide text-amber-200 font-extrabold">Accessing native camera stream...</span>
                 </div>
               )}
               <div id="reader" className="w-full text-white overflow-hidden rounded-xl"></div>
