@@ -24,18 +24,20 @@ export const TeacherDashboard = () => {
   const { currentUser } = useAuth();
   const [applications, setApplications] = useState(getApplications());
   const [searchQuery, setSearchQuery] = useState("");
+  const [filterYear, setFilterYear] = useState("ALL");
+  const [filterSection, setFilterSection] = useState("ALL");
   const [rejectAppId, setRejectAppId] = useState(null);
   const [notification, setNotification] = useState("");
 
-  const teacherBranch = currentUser?.assignedBranch || "CSE";
-  const teacherYear = currentUser?.assignedYear || "3rd Year";
-  const teacherSection = currentUser?.assignedSection || "A";
+  const teacherBranch = currentUser?.assignedBranch || currentUser?.department || "CSE";
 
-  const classApps = applications.filter(a => 
-    a.branch === teacherBranch && 
-    a.year === teacherYear && 
-    a.section === teacherSection
-  );
+  // Faculty sees leave requests belonging to their branch (e.g., CSE faculty sees CSE student leaves)
+  const classApps = applications.filter(a => {
+    const matchBranch = a.branch === teacherBranch || teacherBranch === "ALL";
+    const matchYear = filterYear === "ALL" || a.year === filterYear;
+    const matchSec = filterSection === "ALL" || a.section === filterSection;
+    return matchBranch && matchYear && matchSec;
+  });
 
   const filteredApps = classApps.filter(a => {
     const q = searchQuery.toLowerCase();
@@ -78,12 +80,14 @@ export const TeacherDashboard = () => {
           <div>
             <h2 className="text-xl font-black text-white flex items-center gap-2">
               <BookOpen className="w-6 h-6 text-amber-200" />
-              Class Teacher Portal • {teacherBranch} ({teacherYear} - Sec {teacherSection})
+              Faculty Portal • {teacherBranch} Department Student Leaves
             </h2>
-            <p className="text-xs text-amber-100 mt-1 font-medium">Reviewing leave applications for assigned class section.</p>
+            <p className="text-xs text-amber-100 mt-1 font-medium">
+              Reviewing leave applications submitted by {teacherBranch} branch students.
+            </p>
           </div>
           <div className="px-3.5 py-1.5 bg-[#5A1C1C] border border-[#852C2C] text-white text-xs font-bold rounded-xl">
-            Assigned Teacher: {currentUser?.name}
+            Faculty Officer: {currentUser?.name} ({teacherBranch})
           </div>
         </div>
       </div>
@@ -99,7 +103,7 @@ export const TeacherDashboard = () => {
       {/* Dashboard Statistic Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
         <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
-          <p className="text-[10px] font-extrabold uppercase text-stone-500">Total Requests</p>
+          <p className="text-[10px] font-extrabold uppercase text-stone-500">Total {teacherBranch} Requests</p>
           <p className="text-2xl font-black text-[#702424]">{classApps.length}</p>
         </div>
         <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
@@ -123,17 +127,45 @@ export const TeacherDashboard = () => {
       {/* Application Control & Filter Bar */}
       <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm space-y-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-stone-200">
-          <h3 className="text-lg font-extrabold text-[#702424]">Class Leave Applications ({filteredApps.length})</h3>
+          <h3 className="text-lg font-extrabold text-[#702424]">{teacherBranch} Student Leave Applications ({filteredApps.length})</h3>
           
-          <div className="relative w-full sm:w-72">
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by Roll No, Student Name..."
-              className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-9 pr-3 py-2 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
-            />
-            <Search className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
+          <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
+            {/* Year Filter */}
+            <select
+              value={filterYear}
+              onChange={(e) => setFilterYear(e.target.value)}
+              className="w-full sm:w-auto bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+            >
+              <option value="ALL">All Years</option>
+              <option value="1st Year">1st Year</option>
+              <option value="2nd Year">2nd Year</option>
+              <option value="3rd Year">3rd Year</option>
+              <option value="4th Year">4th Year</option>
+            </select>
+
+            {/* Section Filter */}
+            <select
+              value={filterSection}
+              onChange={(e) => setFilterSection(e.target.value)}
+              className="w-full sm:w-auto bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+            >
+              <option value="ALL">All Sections</option>
+              <option value="A">Section A</option>
+              <option value="B">Section B</option>
+              <option value="C">Section C</option>
+            </select>
+
+            {/* Search Input */}
+            <div className="relative w-full sm:w-64">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search Roll No, Student Name..."
+                className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-9 pr-3 py-2 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+              />
+              <Search className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
+            </div>
           </div>
         </div>
 

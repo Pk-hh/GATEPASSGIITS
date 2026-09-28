@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../context/AuthContext";
 import { 
   getApplications, 
@@ -20,9 +20,11 @@ import {
   Camera, 
   Volume2, 
   AlertTriangle,
-  Download
+  Download,
+  Upload,
+  RefreshCw
 } from "lucide-react";
-import { Html5QrcodeScanner } from "html5-qrcode";
+import { Html5Qrcode } from "html5-qrcode";
 
 export const SecurityDashboard = () => {
   const { currentUser } = useAuth();
@@ -30,7 +32,12 @@ export const SecurityDashboard = () => {
   const [scanResult, setScanResult] = useState(null);
   const [logs, setLogs] = useState(getGateLogs());
   const [scannerActive, setScannerActive] = useState(false);
+  const [cameraError, setCameraError] = useState("");
+  const [isCameraLoading, setIsCameraLoading] = useState(false);
   const [actionSuccessMessage, setActionSuccessMessage] = useState("");
+
+  const qrCodeInstanceRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   const getCurrentHHMM = () => {
     const d = new Date();
@@ -126,29 +133,144 @@ export const SecurityDashboard = () => {
     }
   };
 
-  useEffect(() => {
-    let scanner = null;
-    if (scannerActive) {
-      scanner = new Html5QrcodeScanner("reader", {
-        fps: 10,
-        qrbox: { width: 250, height: 250 }
-      }, false);
+  const startCameraScanner = async () => {
+    setCameraError("");
+    setIsCameraLoading(true);
+    setScannerActive(true);
 
-      scanner.render((decodedText) => {
-        handleScanCode(decodedText);
-        setScannerActive(false);
-        scanner.clear();
-      }, (err) => {
-        // quiet error logging
-      });
+    setTimeout(async () => {
+      const container = document.getElementById("reader");
+      if (!container) {
+        setIsCameraLoading(false);
+        return;
+      }
+
+      try {
+        if (qrCodeInstanceRef.current) {
+          try {
+            await qrCodeInstanceRef.current.stop();
+          } catch (e) {}
+          qrCodeInstanceRef.current.clear();
+          qrCodeInstanceRef.current = null;
+        }
+
+        const html5QrCode = new Html5Qrcode("reader");
+        qrCodeInstanceRef.current = html5QrCode;
+
+        const config = {
+          fps: 10,
+          qrbox: { width: 250, height: 250 },
+          aspectRatio: 1.0
+        };
+
+        const onScanSuccess = (decodedText) => {
+          handleScanCode(decodedText);
+          stopCameraScanner();
+        };
+
+        try {
+          // Priority 1: Request environment (rear/back) camera for native apps and mobile phones
+          await html5QrCode.start(
+            { facingMode: "environment" },
+            config,
+            onScanSuccess,
+            () => {}
+          );
+        } catch (envErr) {
+          // Priority 2: Fallback to available native camera device IDs
+          const cameras = await Html5Qrcode.getCameras().catch(() => []);
+          if (cameras && cameras.length > 0) {
+            // Find rear camera or pick first available
+            const backCam = cameras.find(c => c.label.toLowerCase().includes("back") || c.label.toLowerCase().includes("rear"));
+            const camId = backCam ? backCam.id : cameras[0].id;
+            await html5QrCode.start(
+              camId,
+              config,
+              onScanSuccess,
+              () => {}
+            );
+          } else {
+            // Priority 3: User facing camera fallback
+            await html5QrCode.start(
+              { facingMode: "user" },
+              config,
+              onScanSuccess,
+              () => {}
+            );
+          }
+        }
+        setIsCameraLoading(false);
+      } catch (err) {
+        console.error("Camera access error:", err);
+        setIsCameraLoading(false);
+        setCameraError(
+          "Camera access could not be opened automatically. Please check camera permissions in your browser or native app settings, or click 'Take Photo / Upload QR' below."
+        );
+      }
+    }, 200);
+  };
+
+  const stopCameraScanner = async () => {
+    setScannerActive(false);
+    setIsCameraLoading(false);
+    if (qrCodeInstanceRef.current) {
+      try {
+        if (qrCodeInstanceRef.current.isScanning) {
+          await qrCodeInstanceRef.current.stop();
+        }
+        qrCodeInstanceRef.current.clear();
+      } catch (e) {
+        console.warn("Error stopping scanner:", e);
+      }
+      qrCodeInstanceRef.current = null;
     }
+  };
 
+  const toggleScanner = () => {
+    if (scannerActive) {
+      stopCameraScanner();
+    } else {
+      startCameraScanner();
+    }
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setCameraError("");
+    try {
+      let tempDiv = document.getElementById("temp-file-reader");
+      if (!tempDiv) {
+        tempDiv = document.createElement("div");
+        tempDiv.id = "temp-file-reader";
+        tempDiv.style.display = "none";
+        document.body.appendChild(tempDiv);
+      }
+
+      const tempScanner = new Html5Qrcode("temp-file-reader");
+      const decodedText = await tempScanner.scanFile(file, true);
+      tempScanner.clear();
+      handleScanCode(decodedText);
+    } catch (err) {
+      console.error("File QR decode error:", err);
+      setCameraError("Could not detect a valid QR code in the selected photo. Please take a clearer photo of the QR code and try again.");
+    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  useEffect(() => {
     return () => {
-      if (scanner) {
-        scanner.clear().catch(() => {});
+      if (qrCodeInstanceRef.current) {
+        try {
+          if (qrCodeInstanceRef.current.isScanning) {
+            qrCodeInstanceRef.current.stop().catch(() => {});
+          }
+          qrCodeInstanceRef.current.clear();
+        } catch (e) {}
       }
     };
-  }, [scannerActive]);
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -165,8 +287,8 @@ export const SecurityDashboard = () => {
           </div>
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setScannerActive(!scannerActive)}
-              className="px-4 py-2.5 bg-[#5A1C1C] hover:bg-[#852C2C] text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center gap-2"
+              onClick={toggleScanner}
+              className="px-4 py-2.5 bg-[#5A1C1C] hover:bg-[#852C2C] text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center gap-2 transition-colors"
             >
               <Camera className="w-4 h-4 text-amber-300" />
               {scannerActive ? "Stop Camera Scanner" : "Launch Camera QR Scanner"}
@@ -195,14 +317,55 @@ export const SecurityDashboard = () => {
         
         {/* Left Side: Scanner & Search */}
         <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm space-y-4">
-          <h3 className="text-base font-extrabold text-[#702424] flex items-center gap-2">
-            <Scan className="w-5 h-5 text-[#702424]" />
-            Digital Gate Pass Verification
-          </h3>
+          <div className="flex items-center justify-between">
+            <h3 className="text-base font-extrabold text-[#702424] flex items-center gap-2">
+              <Scan className="w-5 h-5 text-[#702424]" />
+              Digital Gate Pass Verification
+            </h3>
+            
+            {/* Native Photo / Upload QR Fallback Button */}
+            <div>
+              <input
+                type="file"
+                ref={fileInputRef}
+                accept="image/*"
+                capture="environment"
+                onChange={handleFileUpload}
+                className="hidden"
+              />
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="px-3 py-1.5 bg-[#FFF3E4] hover:bg-[#FFE6C9] text-[#702424] font-extrabold text-xs rounded-xl border border-amber-200 flex items-center gap-1.5 transition-colors"
+                title="Use native camera to take photo or pick QR from gallery"
+              >
+                <Upload className="w-3.5 h-3.5 text-[#702424]" />
+                Take Photo / Upload QR
+              </button>
+            </div>
+          </div>
+
+          {cameraError && (
+            <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-xs text-red-900 font-bold flex items-start gap-2">
+              <AlertTriangle className="w-4 h-4 text-red-600 shrink-0 mt-0.5" />
+              <div>
+                <p>{cameraError}</p>
+                <p className="text-[11px] text-red-700 mt-1 font-normal">
+                  Tip: On Native mobile apps, tap <strong>"Take Photo / Upload QR"</strong> above to open your native device camera directly.
+                </p>
+              </div>
+            </div>
+          )}
 
           {scannerActive && (
-            <div className="p-4 bg-stone-900 rounded-2xl border border-stone-700 overflow-hidden">
-              <div id="reader" className="w-full text-white"></div>
+            <div className="p-4 bg-stone-900 rounded-2xl border border-stone-700 overflow-hidden relative min-h-[260px] flex flex-col items-center justify-center">
+              {isCameraLoading && (
+                <div className="absolute inset-0 bg-stone-900/90 z-10 flex flex-col items-center justify-center text-white text-xs font-bold gap-2">
+                  <RefreshCw className="w-6 h-6 animate-spin text-amber-400" />
+                  <span>Accessing native camera stream...</span>
+                </div>
+              )}
+              <div id="reader" className="w-full text-white overflow-hidden rounded-xl"></div>
             </div>
           )}
 
