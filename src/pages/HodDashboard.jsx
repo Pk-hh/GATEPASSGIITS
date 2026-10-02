@@ -73,7 +73,7 @@ export const HodDashboard = () => {
     <div className="space-y-6">
       
       {/* Header Banner */}
-      <div className="bg-[#702424] text-white rounded-3xl p-6 shadow-md border border-[#702424]">
+      <div className="bg-[#0A2540] text-white rounded-3xl p-6 shadow-md border border-[#0A2540]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-black text-white flex items-center gap-2">
@@ -82,8 +82,8 @@ export const HodDashboard = () => {
             </h2>
             <p className="text-xs text-amber-100 mt-1 font-medium">Final Gate Pass Generation & Student Leave Verification</p>
           </div>
-          <div className="px-4 py-2 bg-[#5A1C1C] border border-[#852C2C] text-white text-xs font-bold rounded-2xl flex items-center gap-2">
-            <Award className="w-4 h-4 text-amber-300" />
+          <div className="px-4 py-2 bg-[#06182B] border border-[#0F3B66] text-white text-xs font-bold rounded-2xl flex items-center gap-2">
+            <Award className="w-4 h-4 text-slate-300" />
             HOD: {currentUser?.name}
           </div>
         </div>
@@ -98,9 +98,9 @@ export const HodDashboard = () => {
       )}
 
       {/* Prominent Search Section */}
-      <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm space-y-4">
-        <h3 className="text-sm font-extrabold text-[#702424] uppercase tracking-wider flex items-center gap-2">
-          <Search className="w-4 h-4 text-[#702424]" />
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+        <h3 className="text-sm font-extrabold text-[#0A2540] uppercase tracking-wider flex items-center gap-2">
+          <Search className="w-4 h-4 text-[#0A2540]" />
           HOD Student Roll Number Search Engine
         </h3>
 
@@ -111,7 +111,7 @@ export const HodDashboard = () => {
               value={rollSearch}
               onChange={(e) => setRollSearch(e.target.value)}
               placeholder="Search Student Roll Number (e.g. 2024CSE0142)..."
-              className="w-full bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-xs text-stone-900 font-mono font-bold focus:outline-none focus:border-[#702424]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 font-mono font-bold focus:outline-none focus:border-[#0A2540]"
             />
           </div>
 
@@ -119,7 +119,7 @@ export const HodDashboard = () => {
             <select
               value={filterBranch}
               onChange={(e) => setFilterBranch(e.target.value)}
-              className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0A2540]"
             >
               <option value="ALL">All Branches</option>
               <option value="CSE">CSE</option>
@@ -134,7 +134,7 @@ export const HodDashboard = () => {
             <select
               value={filterSection}
               onChange={(e) => setFilterSection(e.target.value)}
-              className="w-full bg-stone-50 border border-stone-200 rounded-xl px-3 py-2.5 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2.5 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0A2540]"
             >
               <option value="ALL">All Sections</option>
               <option value="A">Section A</option>
@@ -147,33 +147,33 @@ export const HodDashboard = () => {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
           <p className="text-[10px] font-extrabold uppercase text-amber-700">Awaiting HOD Approval</p>
           <p className="text-2xl font-black text-amber-600">{pendingHodApps.length}</p>
         </div>
 
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
           <p className="text-[10px] font-extrabold uppercase text-emerald-700">Gate Passes Issued</p>
           <p className="text-2xl font-black text-emerald-600">{finalApprovedApps.length}</p>
         </div>
 
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
           <p className="text-[10px] font-extrabold uppercase text-red-700">Total Rejected</p>
           <p className="text-2xl font-black text-red-600">{rejectedApps.length}</p>
         </div>
 
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
-          <p className="text-[10px] font-extrabold uppercase text-[#702424]">Department Total</p>
-          <p className="text-2xl font-black text-[#702424]">{deptApps.length}</p>
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
+          <p className="text-[10px] font-extrabold uppercase text-[#0A2540]">Department Total</p>
+          <p className="text-2xl font-black text-[#0A2540]">{deptApps.length}</p>
         </div>
       </div>
 
       {/* Applications List */}
-      <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm space-y-4">
-        <h3 className="text-lg font-extrabold text-[#702424]">Department Leave Requests ({filteredApps.length})</h3>
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+        <h3 className="text-lg font-extrabold text-[#0A2540]">Department Leave Requests ({filteredApps.length})</h3>
 
         {filteredApps.length === 0 ? (
-          <div className="p-8 text-center text-stone-500 text-xs">
+          <div className="p-8 text-center text-slate-500 text-xs">
             No department applications found matching criteria.
           </div>
         ) : (
@@ -181,14 +181,14 @@ export const HodDashboard = () => {
             {filteredApps.map((app) => (
               <div 
                 key={app.id} 
-                className="bg-[#FFF3E4] border border-stone-200 rounded-2xl p-5 space-y-3 relative hover:border-stone-300 transition-colors shadow-2xs"
+                className="bg-[#EBF3FA] border border-slate-200 rounded-2xl p-5 space-y-3 relative hover:border-slate-300 transition-colors shadow-2xs"
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-mono text-xs font-black text-[#702424] bg-white px-2.5 py-0.5 rounded-lg border border-stone-200">
+                    <span className="font-mono text-xs font-black text-[#0A2540] bg-white px-2.5 py-0.5 rounded-lg border border-slate-200">
                       {app.rollNumber}
                     </span>
-                    <span className="text-xs font-bold text-stone-900 ml-2">{app.studentName}</span>
+                    <span className="text-xs font-bold text-slate-900 ml-2">{app.studentName}</span>
                   </div>
 
                   {app.status === "APPROVED_BY_CLASS_TEACHER" ? (
@@ -204,24 +204,24 @@ export const HodDashboard = () => {
                       Rejected
                     </span>
                   ) : (
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-stone-100 text-stone-700 border border-stone-200">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold bg-slate-100 text-slate-700 border border-slate-200">
                       Pending Teacher
                     </span>
                   )}
                 </div>
 
-                <div className="text-xs text-stone-700 space-y-1">
-                  <p><span className="font-bold text-stone-900">Branch & Section:</span> {app.branch} • {app.year} • Sec {app.section}</p>
-                  <p><span className="font-bold text-stone-900">Duration:</span> {app.leaveType} ({app.leaveDate})</p>
-                  <p><span className="font-bold text-stone-900">Timing:</span> {app.fromTime} - {app.toTime}</p>
-                  <p><span className="font-bold text-stone-900">Reason:</span> "{app.reason}"</p>
-                  <p><span className="font-bold text-stone-900">Class Teacher Endorsement:</span> {app.teacherApprovedBy || "Pending"}</p>
+                <div className="text-xs text-slate-700 space-y-1">
+                  <p><span className="font-bold text-slate-900">Branch & Section:</span> {app.branch} • {app.year} • Sec {app.section}</p>
+                  <p><span className="font-bold text-slate-900">Duration:</span> {app.leaveType} ({app.leaveDate})</p>
+                  <p><span className="font-bold text-slate-900">Timing:</span> {app.fromTime} - {app.toTime}</p>
+                  <p><span className="font-bold text-slate-900">Reason:</span> "{app.reason}"</p>
+                  <p><span className="font-bold text-slate-900">Class Teacher Endorsement:</span> {app.teacherApprovedBy || "Pending"}</p>
                 </div>
 
-                <div className="flex items-center justify-between pt-2 border-t border-stone-200">
+                <div className="flex items-center justify-between pt-2 border-t border-slate-200">
                   <button
                     onClick={() => setHistoryStudent(app)}
-                    className="text-xs font-bold text-[#702424] hover:underline flex items-center gap-1"
+                    className="text-xs font-bold text-[#0A2540] hover:underline flex items-center gap-1"
                   >
                     <History className="w-3.5 h-3.5" />
                     Student History
@@ -239,7 +239,7 @@ export const HodDashboard = () => {
                         </button>
                         <button
                           onClick={() => handleApprove(app.id)}
-                          className="px-4 py-1.5 bg-[#702424] hover:bg-[#581A1A] text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs"
+                          className="px-4 py-1.5 bg-[#0A2540] hover:bg-[#071C30] text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs"
                         >
                           <Check className="w-3.5 h-3.5" />
                           Issue Gate Pass

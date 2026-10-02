@@ -90,15 +90,15 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
     <div
       id="printable-gate-pass"
       ref={cardRef}
-      className="bg-white text-stone-900 rounded-b-2xl sm:rounded-b-3xl p-4 sm:p-7 max-w-lg w-full border border-stone-200/90 shadow-2xl relative overflow-hidden font-sans border-t-4 border-t-[#702424]"
+      className="bg-white text-slate-900 rounded-b-2xl sm:rounded-b-3xl p-4 sm:p-7 max-w-lg w-full border border-slate-200 shadow-2xl relative overflow-hidden font-sans border-t-4 border-t-[#0A2540]"
     >
       {/* Background Seal Watermark */}
       <div className="absolute -right-16 -bottom-16 opacity-[0.03] pointer-events-none select-none">
-        <ShieldCheck className="w-96 h-96 text-[#702424]" />
+        <ShieldCheck className="w-96 h-96 text-[#0A2540]" />
       </div>
 
       {/* College Header with Both Logos */}
-      <div className="border-b border-stone-200 pb-4 mb-5 text-center relative space-y-1.5">
+      <div className="border-b border-slate-200 pb-4 mb-5 text-center relative space-y-1.5">
         <div className="flex items-center justify-center gap-3 mb-1.5">
           <img 
             src="/college-logo-2.png" 
@@ -113,13 +113,13 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
         </div>
 
         <div>
-          <h2 className="text-xs sm:text-base font-black tracking-tight text-[#702424] uppercase leading-tight px-1">
+          <h2 className="text-xs sm:text-base font-black tracking-tight text-[#0A2540] uppercase leading-tight px-1">
             GONNA INSTITUTE OF INFORMATION TECHNOLOGY & SCIENCES
           </h2>
-          <p className="text-[9px] sm:text-[10px] text-stone-600 font-bold mt-0.5 leading-tight">
+          <p className="text-[9px] sm:text-[10px] text-slate-600 font-bold mt-0.5 leading-tight">
             (Approved by AICTE, New Delhi, Affiliated to JNTU GURAJADA, VIZIANAGARAM)
           </p>
-          <p className="text-[8px] sm:text-[9px] text-stone-500 font-medium leading-tight">
+          <p className="text-[8px] sm:text-[9px] text-slate-500 font-medium leading-tight">
             Gonnavanipalem, Parwada madalam, Anakapalli – 530 053
           </p>
         </div>
@@ -133,28 +133,28 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
       </div>
 
       {/* QR Code & ID Container Box */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-[#FFF3E4] rounded-2xl sm:rounded-3xl border border-[#702424]/20 mb-5 shadow-xs">
-        <div className="bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-stone-200 shrink-0">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-[#EBF3FA] rounded-2xl sm:rounded-3xl border border-[#0A2540]/20 mb-5 shadow-xs">
+        <div className="bg-white p-2.5 sm:p-3 rounded-2xl shadow-sm border border-slate-200 shrink-0">
           <QRCodeSVG value={qrData} size={125} level="H" includeMargin={true} />
         </div>
         
         <div className="flex-1 text-center sm:text-left space-y-2">
           <div>
-            <span className="text-[9px] sm:text-[10px] font-black tracking-widest text-stone-500 uppercase block">Gate Pass ID</span>
-            <span className="text-lg sm:text-2xl font-black font-mono text-[#702424] tracking-wider block">
+            <span className="text-[9px] sm:text-[10px] font-black tracking-widest text-slate-500 uppercase block">Gate Pass ID</span>
+            <span className="text-lg sm:text-2xl font-black font-mono text-[#0A2540] tracking-wider block">
               {app.gatePassId || "GP-2026-PENDING"}
             </span>
           </div>
 
           <div>
-            <span className="text-[9px] sm:text-[10px] font-black tracking-widest text-stone-500 uppercase block">Application Ref</span>
-            <span className="text-[11px] sm:text-xs font-bold font-mono text-stone-700 bg-white px-2.5 py-0.5 rounded-md border border-stone-200 inline-block">
+            <span className="text-[9px] sm:text-[10px] font-black tracking-widest text-slate-500 uppercase block">Application Ref</span>
+            <span className="text-[11px] sm:text-xs font-bold font-mono text-slate-700 bg-white px-2.5 py-0.5 rounded-md border border-slate-200 inline-block">
               {app.id}
             </span>
           </div>
 
           <div className="pt-0.5">
-            <span className="inline-block px-3 py-0.5 text-[11px] sm:text-xs font-extrabold text-[#702424] bg-white rounded-xl border border-stone-200 shadow-2xs">
+            <span className="inline-block px-3 py-0.5 text-[11px] sm:text-xs font-extrabold text-[#0A2540] bg-white rounded-xl border border-slate-200 shadow-2xs">
               {app.leaveType} Leave
             </span>
           </div>
@@ -162,34 +162,34 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
       </div>
 
       {/* Student Details Grid */}
-      <div className="grid grid-cols-2 gap-2.5 sm:gap-3 p-3.5 sm:p-4 bg-stone-50 rounded-2xl border border-stone-200 text-[11px] sm:text-xs mb-5">
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-3 p-3.5 sm:p-4 bg-slate-50 rounded-2xl border border-slate-200 text-[11px] sm:text-xs mb-5">
         <div>
-          <span className="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase block tracking-wider">Student Name</span>
-          <span className="font-extrabold text-stone-900 text-xs sm:text-sm leading-tight block">{app.studentName}</span>
+          <span className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase block tracking-wider">Student Name</span>
+          <span className="font-extrabold text-slate-900 text-xs sm:text-sm leading-tight block">{app.studentName}</span>
         </div>
         <div>
-          <span className="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase block tracking-wider">Roll Number</span>
-          <span className="font-mono font-black text-[#702424] text-xs sm:text-sm block">{app.rollNumber}</span>
+          <span className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase block tracking-wider">Roll Number</span>
+          <span className="font-mono font-black text-[#0A2540] text-xs sm:text-sm block">{app.rollNumber}</span>
         </div>
         <div>
-          <span className="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase block tracking-wider">Course & Branch</span>
-          <span className="font-bold text-stone-800 block">{app.course || "B.Tech"} • {app.branch}</span>
+          <span className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase block tracking-wider">Course & Branch</span>
+          <span className="font-bold text-slate-800 block">{app.course || "B.Tech"} • {app.branch}</span>
         </div>
         <div>
-          <span className="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase block tracking-wider">Year & Section</span>
-          <span className="font-bold text-stone-800 block">{app.year || "3rd Year"} • Sec {app.section || "A"}</span>
+          <span className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase block tracking-wider">Year & Section</span>
+          <span className="font-bold text-slate-800 block">{app.year || "3rd Year"} • Sec {app.section || "A"}</span>
         </div>
         <div>
-          <span className="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase block tracking-wider">Valid Date</span>
-          <span className="font-bold text-stone-900 flex items-center gap-1 mt-0.5">
-            <Calendar className="w-3.5 h-3.5 text-[#702424]" />
+          <span className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase block tracking-wider">Valid Date</span>
+          <span className="font-bold text-slate-900 flex items-center gap-1 mt-0.5">
+            <Calendar className="w-3.5 h-3.5 text-[#0A2540]" />
             {app.leaveDate}
           </span>
         </div>
         <div>
-          <span className="text-[9px] sm:text-[10px] font-black text-stone-400 uppercase block tracking-wider">Valid Timing</span>
-          <span className="font-mono font-bold text-stone-900 flex items-center gap-1 mt-0.5">
-            <Clock className="w-3.5 h-3.5 text-[#702424]" />
+          <span className="text-[9px] sm:text-[10px] font-black text-slate-400 uppercase block tracking-wider">Valid Timing</span>
+          <span className="font-mono font-bold text-slate-900 flex items-center gap-1 mt-0.5">
+            <Clock className="w-3.5 h-3.5 text-[#0A2540]" />
             {app.fromTime} - {app.toTime}
           </span>
         </div>
@@ -197,23 +197,23 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
 
       {/* Reason for Leave */}
       <div className="space-y-3 text-[11px] sm:text-xs mb-5">
-        <div className="p-3 bg-stone-50 rounded-r-xl rounded-l-md border-l-4 border-l-[#702424] border border-stone-200">
-          <span className="font-extrabold text-stone-900 block mb-0.5">Reason for Leave:</span>
-          <p className="text-stone-800 italic leading-relaxed">"{app.reason}"</p>
+        <div className="p-3 bg-slate-50 rounded-r-xl rounded-l-md border-l-4 border-l-[#0A2540] border border-slate-200">
+          <span className="font-extrabold text-slate-900 block mb-0.5">Reason for Leave:</span>
+          <p className="text-slate-800 italic leading-relaxed">"{app.reason}"</p>
         </div>
 
         {/* Approvals */}
         <div className="grid grid-cols-2 gap-2.5 text-[10px] sm:text-xs">
-          <div className="p-2.5 bg-stone-50 rounded-xl border border-stone-200">
-            <span className="text-stone-500 font-extrabold block uppercase text-[8px] sm:text-[9px] mb-0.5">Class Teacher Approval</span>
+          <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span className="text-slate-500 font-extrabold block uppercase text-[8px] sm:text-[9px] mb-0.5">Class Teacher Approval</span>
             <div className="flex items-center gap-1 text-emerald-800 font-extrabold">
               <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
               <span className="truncate">{app.teacherApprovedBy || "Dr. S. K. Verma"}</span>
             </div>
           </div>
 
-          <div className="p-2.5 bg-stone-50 rounded-xl border border-stone-200">
-            <span className="text-stone-500 font-extrabold block uppercase text-[8px] sm:text-[9px] mb-0.5">HOD Final Approval</span>
+          <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-200">
+            <span className="text-slate-500 font-extrabold block uppercase text-[8px] sm:text-[9px] mb-0.5">HOD Final Approval</span>
             <div className="flex items-center gap-1 text-emerald-800 font-extrabold">
               <Check className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
               <span className="truncate">{app.hodApprovedBy || "Prof. A. N. Joshi"}</span>
@@ -245,9 +245,9 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
       )}
 
       {/* Security Footer Note */}
-      <div className="text-center pt-3 border-t border-stone-200 text-[9px] sm:text-[10px] text-stone-500 font-semibold space-y-1">
-        <p className="flex items-center justify-center gap-1 text-[#702424]">
-          <Lock className="w-3 h-3 text-[#702424]" />
+      <div className="text-center pt-3 border-t border-slate-200 text-[9px] sm:text-[10px] text-slate-500 font-semibold space-y-1">
+        <p className="flex items-center justify-center gap-1 text-[#0A2540]">
+          <Lock className="w-3 h-3 text-[#0A2540]" />
           Secured by SHA-256 Token Signature • Gate Officer Verification Required
         </p>
         <p>© 2026 GONNA INSTITUTE OF INFORMATION TECHNOLOGY & SCIENCES</p>
@@ -257,20 +257,20 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
 
   if (!isModal) {
     return (
-      <div className="rounded-2xl sm:rounded-3xl border border-stone-200/90 shadow-2xl overflow-hidden border-t-4 border-t-[#702424]">
+      <div className="rounded-2xl sm:rounded-3xl border border-slate-200 shadow-2xl overflow-hidden border-t-4 border-t-[#0A2540]">
         {CardContent}
       </div>
     );
   }
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-stone-900/80 backdrop-blur-xs p-3 sm:p-6 flex items-start justify-center min-h-full">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/80 backdrop-blur-xs p-3 sm:p-6 flex items-start justify-center min-h-full">
       
       {/* Outer Card Container with rounded corners & overflow hidden */}
-      <div className="relative max-w-lg w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-stone-200/90 my-4 sm:my-8 flex flex-col z-10">
+      <div className="relative max-w-lg w-full bg-white rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden border border-slate-200 my-4 sm:my-8 flex flex-col z-10">
         
         {/* Sticky Mobile-Friendly Control Top Bar */}
-        <div className="sticky top-0 z-30 bg-[#702424] text-white p-3 sm:p-4 border-b border-[#5A1C1C] flex items-center justify-between gap-2 shadow-md shrink-0 no-print">
+        <div className="sticky top-0 z-30 bg-[#0A2540] text-white p-3 sm:p-4 border-b border-[#06182B] flex items-center justify-between gap-2 shadow-md shrink-0 no-print">
           
           {/* EXPLICIT BACK BUTTON */}
           <button
@@ -286,19 +286,19 @@ export const GatePassCard = ({ app, onClose, isModal = true }) => {
             <button
               onClick={handleDownloadPDF}
               disabled={isGeneratingPDF}
-              className="px-2.5 sm:px-3 py-1.5 bg-amber-400 hover:bg-amber-300 text-stone-950 font-black text-xs rounded-xl flex items-center gap-1 transition-all shadow-xs active:scale-95 disabled:opacity-50"
+              className="px-2.5 sm:px-3 py-1.5 bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-xs rounded-xl flex items-center gap-1 transition-all shadow-xs active:scale-95 disabled:opacity-50"
               title="Download Gate Pass PDF"
             >
-              <Download className="w-3.5 h-3.5 text-stone-950" />
+              <Download className="w-3.5 h-3.5 text-slate-950" />
               <span>{isGeneratingPDF ? "Exporting..." : "PDF"}</span>
             </button>
             
             <button
               onClick={handlePrint}
-              className="px-2.5 sm:px-3 py-1.5 bg-[#5A1C1C] hover:bg-[#852C2C] text-white font-bold text-xs rounded-xl hidden sm:flex items-center gap-1 transition-all border border-[#852C2C]"
+              className="px-2.5 sm:px-3 py-1.5 bg-[#06182B] hover:bg-[#0F3B66] text-white font-bold text-xs rounded-xl hidden sm:flex items-center gap-1 transition-all border border-[#0F3B66]"
               title="Print Gate Pass"
             >
-              <Printer className="w-3.5 h-3.5 text-amber-300" />
+              <Printer className="w-3.5 h-3.5 text-slate-300" />
               <span>Print</span>
             </button>
 

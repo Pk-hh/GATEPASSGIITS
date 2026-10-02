@@ -28,7 +28,7 @@ export const FirebaseConfigModal = ({ isOpen, onClose }) => {
       <div className="bg-white border border-slate-200 rounded-3xl max-w-lg w-full p-6 shadow-2xl">
         <div className="flex items-center justify-between pb-4 border-b border-slate-100">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-indigo-50 text-indigo-600 rounded-2xl border border-indigo-200">
+            <div className="p-2.5 bg-sky-50 text-[#0A2540] rounded-2xl border border-sky-200">
               <Database className="w-5 h-5" />
             </div>
             <div>
@@ -68,7 +68,7 @@ export const FirebaseConfigModal = ({ isOpen, onClose }) => {
                 type="text"
                 value={config[field.key] || ""}
                 onChange={(e) => handleChange(field.key, e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:border-indigo-600 focus:bg-white transition-colors"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-mono text-slate-900 focus:outline-none focus:border-[#0A2540] focus:bg-white transition-colors"
               />
             </div>
           ))}
@@ -90,7 +90,7 @@ export const FirebaseConfigModal = ({ isOpen, onClose }) => {
             </button>
             <button
               type="submit"
-              className="px-5 py-2.5 text-xs font-extrabold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl shadow-md transition-all"
+              className="px-5 py-2.5 text-xs font-extrabold text-white bg-[#0A2540] hover:bg-[#071C30] rounded-xl shadow-md transition-all"
             >
               Save Credentials
             </button>

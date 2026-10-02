@@ -83,7 +83,7 @@ export function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF7F2] text-stone-800 flex flex-col font-sans selection:bg-[#702424] selection:text-white transition-colors duration-300">
+    <div className="min-h-screen bg-[#F4F8FB] text-slate-800 flex flex-col font-sans selection:bg-[#0A2540] selection:text-white transition-colors duration-300">
       {/* Top Header Navbar */}
       <Navbar />
 

@@ -279,7 +279,7 @@ export const SecurityDashboard = () => {
     <div className="space-y-6">
       
       {/* Header Banner */}
-      <div className="bg-[#702424] text-white rounded-3xl p-6 shadow-md border border-[#702424]">
+      <div className="bg-[#0A2540] text-white rounded-3xl p-6 shadow-md border border-[#0A2540]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-black text-white flex items-center gap-2">
@@ -294,16 +294,16 @@ export const SecurityDashboard = () => {
               className={`px-5 py-3 rounded-2xl font-black text-xs shadow-lg flex items-center gap-2.5 transition-all duration-300 active:scale-95 border ${
                 scannerActive
                   ? "bg-gradient-to-r from-red-600 to-rose-700 text-white border-red-400/50 shadow-red-900/30 hover:from-red-700 hover:to-rose-800"
-                  : "bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-stone-950 border-amber-300/60 shadow-amber-500/30 hover:from-amber-300 hover:to-amber-500 hover:shadow-amber-500/50"
+                  : "bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 text-slate-950 border-amber-300/60 shadow-amber-500/30 hover:from-amber-300 hover:to-amber-500 hover:shadow-amber-500/50"
               }`}
             >
-              <div className={`p-1.5 rounded-xl ${scannerActive ? "bg-white/20" : "bg-stone-950/15"}`}>
-                <Camera className={`w-4 h-4 ${scannerActive ? "text-white animate-pulse" : "text-stone-950"}`} />
+              <div className={`p-1.5 rounded-xl ${scannerActive ? "bg-white/20" : "bg-slate-950/15"}`}>
+                <Camera className={`w-4 h-4 ${scannerActive ? "text-white animate-pulse" : "text-slate-950"}`} />
               </div>
               <span className="tracking-wide">
                 {scannerActive ? "STOP CAMERA SCANNER" : "LAUNCH CAMERA QR SCANNER"}
               </span>
-              <span className={`w-2.5 h-2.5 rounded-full ${scannerActive ? "bg-red-300 animate-ping" : "bg-stone-950 animate-pulse"}`}></span>
+              <span className={`w-2.5 h-2.5 rounded-full ${scannerActive ? "bg-red-300 animate-ping" : "bg-slate-950 animate-pulse"}`}></span>
             </button>
           </div>
         </div>
@@ -328,10 +328,10 @@ export const SecurityDashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Left Side: Scanner & Search */}
-        <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm space-y-4">
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="text-base font-extrabold text-[#702424] flex items-center gap-2">
-              <Scan className="w-5 h-5 text-[#702424]" />
+            <h3 className="text-base font-extrabold text-[#0A2540] flex items-center gap-2">
+              <Scan className="w-5 h-5 text-[#0A2540]" />
               Digital Gate Pass Verification
             </h3>
             
@@ -351,12 +351,12 @@ export const SecurityDashboard = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className={`w-2.5 h-2.5 rounded-full ${scannerActive ? "bg-emerald-500 animate-ping" : "bg-amber-600 animate-pulse"}`}></div>
-                <h4 className="text-xs font-black text-[#702424] uppercase tracking-wider flex items-center gap-1.5">
+                <h4 className="text-xs font-black text-[#0A2540] uppercase tracking-wider flex items-center gap-1.5">
                   <Sparkles className="w-3.5 h-3.5 text-amber-600" />
                   Camera Scanner Controls
                 </h4>
               </div>
-              <span className="text-[10px] font-extrabold text-[#702424] bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-200">
+              <span className="text-[10px] font-extrabold text-[#0A2540] bg-amber-100 px-2.5 py-0.5 rounded-full border border-amber-200">
                 {scannerActive ? "STREAM ACTIVE" : "READY TO SCAN"}
               </span>
             </div>
@@ -368,11 +368,11 @@ export const SecurityDashboard = () => {
                 onClick={toggleScanner}
                 className={`py-3 px-4 rounded-xl font-black text-xs flex items-center justify-center gap-2 shadow-md transition-all duration-200 active:scale-95 ${
                   scannerActive
-                    ? "bg-stone-900 text-white hover:bg-stone-800 ring-2 ring-stone-700"
-                    : "bg-[#702424] hover:bg-[#581A1A] text-white shadow-[#702424]/25 hover:shadow-lg"
+                    ? "bg-slate-900 text-white hover:bg-stone-800 ring-2 ring-stone-700"
+                    : "bg-[#0A2540] hover:bg-[#071C30] text-white shadow-[#0A2540]/25 hover:shadow-lg"
                 }`}
               >
-                <Aperture className={`w-4 h-4 ${scannerActive ? "text-rose-400 animate-spin" : "text-amber-300"}`} />
+                <Aperture className={`w-4 h-4 ${scannerActive ? "text-rose-400 animate-spin" : "text-slate-300"}`} />
                 <span>{scannerActive ? "Stop Live Camera" : "Open Live HD Scanner"}</span>
               </button>
 
@@ -380,9 +380,9 @@ export const SecurityDashboard = () => {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="py-3 px-4 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-stone-950 font-black text-xs rounded-xl shadow-md shadow-amber-500/20 flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 border border-amber-300/80"
+                className="py-3 px-4 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black text-xs rounded-xl shadow-md shadow-amber-500/20 flex items-center justify-center gap-2 transition-all duration-200 active:scale-95 border border-amber-300/80"
               >
-                <Camera className="w-4 h-4 text-stone-950" />
+                <Camera className="w-4 h-4 text-slate-950" />
                 <span>Snap Photo / Upload QR</span>
               </button>
             </div>
@@ -401,9 +401,9 @@ export const SecurityDashboard = () => {
           )}
 
           {scannerActive && (
-            <div className="p-4 bg-stone-900 rounded-2xl border border-stone-700 overflow-hidden relative min-h-[260px] flex flex-col items-center justify-center shadow-inner">
+            <div className="p-4 bg-slate-900 rounded-2xl border border-slate-700 overflow-hidden relative min-h-[260px] flex flex-col items-center justify-center shadow-inner">
               {isCameraLoading && (
-                <div className="absolute inset-0 bg-stone-900/95 z-10 flex flex-col items-center justify-center text-white text-xs font-bold gap-2.5">
+                <div className="absolute inset-0 bg-slate-900/95 z-10 flex flex-col items-center justify-center text-white text-xs font-bold gap-2.5">
                   <RefreshCw className="w-7 h-7 animate-spin text-amber-400" />
                   <span className="tracking-wide text-amber-200 font-extrabold">Accessing native camera stream...</span>
                 </div>
@@ -413,7 +413,7 @@ export const SecurityDashboard = () => {
           )}
 
           <form onSubmit={handleManualSubmit} className="space-y-3">
-            <label className="block text-xs font-bold text-stone-700 uppercase">
+            <label className="block text-xs font-bold text-slate-700 uppercase">
               Enter Roll No or Gate Pass ID Manually
             </label>
             <div className="flex gap-2">
@@ -422,11 +422,11 @@ export const SecurityDashboard = () => {
                 value={manualInput}
                 onChange={(e) => setManualInput(e.target.value)}
                 placeholder="E.g., PASS-2024CSE0142 or 2024CSE0142..."
-                className="flex-1 bg-stone-50 border border-stone-200 rounded-xl px-4 py-2.5 text-xs text-stone-900 font-mono font-bold focus:outline-none focus:border-[#702424]"
+                className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs text-slate-900 font-mono font-bold focus:outline-none focus:border-[#0A2540]"
               />
               <button
                 type="submit"
-                className="px-5 py-2.5 bg-[#702424] hover:bg-[#581A1A] text-white font-extrabold text-xs rounded-xl shadow-xs"
+                className="px-5 py-2.5 bg-[#0A2540] hover:bg-[#071C30] text-white font-extrabold text-xs rounded-xl shadow-xs"
               >
                 Verify Pass
               </button>
@@ -434,8 +434,8 @@ export const SecurityDashboard = () => {
           </form>
 
           {/* Time Selector */}
-          <div className="pt-2 border-t border-stone-200">
-            <label className="block text-xs font-extrabold text-[#702424] uppercase mb-1">
+          <div className="pt-2 border-t border-slate-200">
+            <label className="block text-xs font-extrabold text-[#0A2540] uppercase mb-1">
               Select Gate Movement Recorded Time
             </label>
             <div className="flex items-center gap-3">
@@ -443,12 +443,12 @@ export const SecurityDashboard = () => {
                 type="time"
                 value={movementTime}
                 onChange={(e) => setMovementTime(e.target.value)}
-                className="bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs font-mono font-bold text-stone-900"
+                className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-mono font-bold text-slate-900"
               />
               <button
                 type="button"
                 onClick={() => setMovementTime(getCurrentHHMM())}
-                className="px-3 py-2 bg-[#FFF3E4] hover:bg-[#FFE6C9] text-[#702424] text-xs font-bold rounded-xl border border-stone-200"
+                className="px-3 py-2 bg-[#EBF3FA] hover:bg-[#DCEBF7] text-[#0A2540] text-xs font-bold rounded-xl border border-slate-200"
               >
                 Set to Current Time
               </button>
@@ -457,12 +457,12 @@ export const SecurityDashboard = () => {
         </div>
 
         {/* Right Side: Scan Outcome */}
-        <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm flex flex-col justify-between">
           <div>
-            <h3 className="text-base font-extrabold text-[#702424] mb-4">Verification Result Outcome</h3>
+            <h3 className="text-base font-extrabold text-[#0A2540] mb-4">Verification Result Outcome</h3>
 
             {!scanResult ? (
-              <div className="p-8 text-center text-stone-500 text-xs my-auto">
+              <div className="p-8 text-center text-slate-500 text-xs my-auto">
                 Scan or enter a Gate Pass ID above to view verification result.
               </div>
             ) : scanResult.isValid ? (
@@ -475,7 +475,7 @@ export const SecurityDashboard = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-2 text-xs text-stone-800 pt-2 border-t border-emerald-200 font-medium">
+                <div className="grid grid-cols-2 gap-2 text-xs text-slate-800 pt-2 border-t border-emerald-200 font-medium">
                   <div><strong>Student Name:</strong> {scanResult.app.studentName}</div>
                   <div><strong>Roll Number:</strong> {scanResult.app.rollNumber}</div>
                   <div><strong>Branch / Sec:</strong> {scanResult.app.branch} ({scanResult.app.section})</div>
@@ -490,7 +490,7 @@ export const SecurityDashboard = () => {
                 <div className="grid grid-cols-2 gap-3 pt-3">
                   <button
                     onClick={handleRecordExit}
-                    className="py-3 bg-[#702424] hover:bg-[#581A1A] text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center justify-center gap-1.5"
+                    className="py-3 bg-[#0A2540] hover:bg-[#071C30] text-white font-extrabold text-xs rounded-xl shadow-xs flex items-center justify-center gap-1.5"
                   >
                     <LogOut className="w-4 h-4" />
                     Record EXIT ({movementTime})
@@ -522,13 +522,13 @@ export const SecurityDashboard = () => {
       </div>
 
       {/* Security Movement Audit Logs Table */}
-      <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm space-y-4">
-        <h3 className="text-lg font-extrabold text-[#702424]">Campus Gate Movement Audit Logs ({logs.length})</h3>
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+        <h3 className="text-lg font-extrabold text-[#0A2540]">Campus Gate Movement Audit Logs ({logs.length})</h3>
 
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
             <thead>
-              <tr className="border-b border-stone-200 text-[#702424] font-bold uppercase text-[10px]">
+              <tr className="border-b border-slate-200 text-[#0A2540] font-bold uppercase text-[10px]">
                 <th className="py-3 px-3">Log Time</th>
                 <th className="py-3 px-3">Action</th>
                 <th className="py-3 px-3">Student Roll</th>
@@ -540,7 +540,7 @@ export const SecurityDashboard = () => {
             <tbody className="divide-y divide-stone-100">
               {logs.map((log) => (
                 <tr key={log.id} className="hover:bg-[#FFF9F2] transition-colors">
-                  <td className="py-3 px-3 font-mono font-bold text-stone-700">{log.recordedTime || log.timestamp}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-slate-700">{log.recordedTime || log.timestamp}</td>
                   <td className="py-3 px-3">
                     <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold ${
                       log.action === "EXIT" ? "bg-amber-100 text-amber-900 border border-amber-200" : "bg-emerald-100 text-emerald-900 border border-emerald-200"
@@ -548,10 +548,10 @@ export const SecurityDashboard = () => {
                       {log.action}
                     </span>
                   </td>
-                  <td className="py-3 px-3 font-mono font-bold text-[#702424]">{log.rollNumber}</td>
-                  <td className="py-3 px-3 font-extrabold text-stone-900">{log.studentName}</td>
-                  <td className="py-3 px-3 text-stone-700">{log.gate}</td>
-                  <td className="py-3 px-3 text-stone-700">{log.guardName}</td>
+                  <td className="py-3 px-3 font-mono font-bold text-[#0A2540]">{log.rollNumber}</td>
+                  <td className="py-3 px-3 font-extrabold text-slate-900">{log.studentName}</td>
+                  <td className="py-3 px-3 text-slate-700">{log.gate}</td>
+                  <td className="py-3 px-3 text-slate-700">{log.guardName}</td>
                 </tr>
               ))}
             </tbody>

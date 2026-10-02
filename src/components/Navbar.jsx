@@ -20,7 +20,7 @@ export const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-stone-200 text-stone-800 px-4 sm:px-6 py-2.5 shadow-xs transition-all duration-300">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 text-slate-800 px-4 sm:px-6 py-2.5 shadow-xs transition-all duration-300">
         <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
           
           {/* Logo & Institution Header */}
@@ -44,7 +44,7 @@ export const Navbar = () => {
 
             <div className="text-left">
               <div className="flex items-center gap-2">
-                <h1 className="text-sm sm:text-base font-black tracking-tight text-[#702424] uppercase leading-tight">
+                <h1 className="text-sm sm:text-base font-black tracking-tight text-[#0A2540] uppercase leading-tight">
                   GONNA INSTITUTE OF INFORMATION TECHNOLOGY & SCIENCES
                 </h1>
                 <span className="hidden md:inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 text-[9px] font-extrabold border border-emerald-200 shrink-0">
@@ -52,10 +52,10 @@ export const Navbar = () => {
                   Active Portal
                 </span>
               </div>
-              <p className="text-[10px] text-stone-600 font-semibold leading-tight hidden sm:block">
+              <p className="text-[10px] text-slate-600 font-semibold leading-tight hidden sm:block">
                 (Approved by AICTE, New Delhi, Affiliated to JNTU GURAJADA, VIZIANAGARAM)
               </p>
-              <p className="text-[9px] text-stone-500 font-medium leading-tight hidden md:block">
+              <p className="text-[9px] text-slate-500 font-medium leading-tight hidden md:block">
                 Gonnavanipalem, Parwada madalam, Anakapalli – 530 053
               </p>
             </div>
@@ -65,30 +65,30 @@ export const Navbar = () => {
           <div className="flex items-center gap-3 shrink-0">
             
             {/* Real-time Clock */}
-            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#FFF3E4] border border-stone-200 text-xs text-[#702424] font-mono font-bold shadow-2xs">
-              <Clock className="w-3.5 h-3.5 text-[#702424] animate-pulse" />
+            <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#EBF3FA] border border-slate-200 text-xs text-[#0A2540] font-mono font-bold shadow-2xs">
+              <Clock className="w-3.5 h-3.5 text-[#0A2540] animate-pulse" />
               <span>{currentTime}</span>
             </div>
 
             {/* Active User Badge & Logout */}
             {currentUser && (
-              <div className="flex items-center gap-3 pl-3 border-l border-stone-200">
-                <div className="flex items-center gap-2.5 p-1 pr-3 bg-[#FFF3E4] border border-stone-200 rounded-full">
+              <div className="flex items-center gap-3 pl-3 border-l border-slate-200">
+                <div className="flex items-center gap-2.5 p-1 pr-3 bg-[#EBF3FA] border border-slate-200 rounded-full">
                   <img
                     src={currentUser.avatar || "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=100"}
                     alt={currentUser.name}
-                    className="w-8 h-8 rounded-full object-cover ring-2 ring-[#702424]/20"
+                    className="w-8 h-8 rounded-full object-cover ring-2 ring-[#0A2540]/20"
                   />
                   <div className="hidden md:block text-left">
-                    <p className="text-xs font-black text-[#702424] leading-tight">{currentUser.name}</p>
-                    <p className="text-[9px] text-stone-600 font-black uppercase tracking-wider">{currentUser.role}</p>
+                    <p className="text-xs font-black text-[#0A2540] leading-tight">{currentUser.name}</p>
+                    <p className="text-[9px] text-slate-600 font-black uppercase tracking-wider">{currentUser.role}</p>
                   </div>
                 </div>
 
                 <button
                   onClick={logout}
                   title="Sign Out of Account"
-                  className="p-2.5 text-[#702424] hover:text-red-700 hover:bg-red-50 border border-stone-200 rounded-xl transition-all active:scale-95 shadow-2xs"
+                  className="p-2.5 text-[#0A2540] hover:text-red-700 hover:bg-red-50 border border-slate-200 rounded-xl transition-all active:scale-95 shadow-2xs"
                 >
                   <LogOut className="w-4 h-4" />
                 </button>

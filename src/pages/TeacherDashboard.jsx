@@ -75,7 +75,7 @@ export const TeacherDashboard = () => {
     <div className="space-y-6">
       
       {/* Header Banner */}
-      <div className="bg-[#702424] text-white rounded-3xl p-6 shadow-md border border-[#702424]">
+      <div className="bg-[#0A2540] text-white rounded-3xl p-6 shadow-md border border-[#0A2540]">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl font-black text-white flex items-center gap-2">
@@ -86,7 +86,7 @@ export const TeacherDashboard = () => {
               Reviewing leave applications submitted by {teacherBranch} branch students.
             </p>
           </div>
-          <div className="px-3.5 py-1.5 bg-[#5A1C1C] border border-[#852C2C] text-white text-xs font-bold rounded-xl">
+          <div className="px-3.5 py-1.5 bg-[#06182B] border border-[#0F3B66] text-white text-xs font-bold rounded-xl">
             Faculty Officer: {currentUser?.name} ({teacherBranch})
           </div>
         </div>
@@ -102,39 +102,39 @@ export const TeacherDashboard = () => {
 
       {/* Dashboard Statistic Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
-          <p className="text-[10px] font-extrabold uppercase text-stone-500">Total {teacherBranch} Requests</p>
-          <p className="text-2xl font-black text-[#702424]">{classApps.length}</p>
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
+          <p className="text-[10px] font-extrabold uppercase text-slate-500">Total {teacherBranch} Requests</p>
+          <p className="text-2xl font-black text-[#0A2540]">{classApps.length}</p>
         </div>
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
           <p className="text-[10px] font-extrabold uppercase text-amber-700">Pending Review</p>
           <p className="text-2xl font-black text-amber-600">{pendingApps.length}</p>
         </div>
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
           <p className="text-[10px] font-extrabold uppercase text-emerald-700">Approved</p>
           <p className="text-2xl font-black text-emerald-600">{approvedApps.length}</p>
         </div>
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs">
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs">
           <p className="text-[10px] font-extrabold uppercase text-red-700">Rejected</p>
           <p className="text-2xl font-black text-red-600">{rejectedApps.length}</p>
         </div>
-        <div className="bg-white border border-stone-200 p-4 rounded-2xl shadow-2xs col-span-2 sm:col-span-1">
-          <p className="text-[10px] font-extrabold uppercase text-[#702424]">Today's Leaves</p>
-          <p className="text-2xl font-black text-[#702424]">{todaysLeaves.length}</p>
+        <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xs col-span-2 sm:col-span-1">
+          <p className="text-[10px] font-extrabold uppercase text-[#0A2540]">Today's Leaves</p>
+          <p className="text-2xl font-black text-[#0A2540]">{todaysLeaves.length}</p>
         </div>
       </div>
 
       {/* Application Control & Filter Bar */}
-      <div className="bg-white border border-stone-200 rounded-3xl p-6 shadow-sm space-y-4">
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-stone-200">
-          <h3 className="text-lg font-extrabold text-[#702424]">{teacherBranch} Student Leave Applications ({filteredApps.length})</h3>
+      <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pb-4 border-b border-slate-200">
+          <h3 className="text-lg font-extrabold text-[#0A2540]">{teacherBranch} Student Leave Applications ({filteredApps.length})</h3>
           
           <div className="flex flex-col sm:flex-row items-center gap-2 w-full sm:w-auto">
             {/* Year Filter */}
             <select
               value={filterYear}
               onChange={(e) => setFilterYear(e.target.value)}
-              className="w-full sm:w-auto bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+              className="w-full sm:w-auto bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0A2540]"
             >
               <option value="ALL">All Years</option>
               <option value="1st Year">1st Year</option>
@@ -147,7 +147,7 @@ export const TeacherDashboard = () => {
             <select
               value={filterSection}
               onChange={(e) => setFilterSection(e.target.value)}
-              className="w-full sm:w-auto bg-stone-50 border border-stone-200 rounded-xl px-3 py-2 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+              className="w-full sm:w-auto bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0A2540]"
             >
               <option value="ALL">All Sections</option>
               <option value="A">Section A</option>
@@ -162,16 +162,16 @@ export const TeacherDashboard = () => {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search Roll No, Student Name..."
-                className="w-full bg-stone-50 border border-stone-200 rounded-xl pl-9 pr-3 py-2 text-xs text-stone-900 font-bold focus:outline-none focus:border-[#702424]"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-900 font-bold focus:outline-none focus:border-[#0A2540]"
               />
-              <Search className="w-4 h-4 text-stone-400 absolute left-3 top-2.5" />
+              <Search className="w-4 h-4 text-slate-400 absolute left-3 top-2.5" />
             </div>
           </div>
         </div>
 
         {/* Requests List */}
         {filteredApps.length === 0 ? (
-          <div className="p-8 text-center text-stone-500 text-xs">
+          <div className="p-8 text-center text-slate-500 text-xs">
             No applications match your search.
           </div>
         ) : (
@@ -179,14 +179,14 @@ export const TeacherDashboard = () => {
             {filteredApps.map((app) => (
               <div 
                 key={app.id}
-                className="bg-[#FFF3E4] border border-stone-200 rounded-2xl p-5 space-y-3 relative hover:border-stone-300 transition-colors shadow-2xs"
+                className="bg-[#EBF3FA] border border-slate-200 rounded-2xl p-5 space-y-3 relative hover:border-slate-300 transition-colors shadow-2xs"
               >
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-black text-[#702424] bg-white px-2.5 py-0.5 rounded-lg border border-stone-200">
+                    <span className="font-mono text-xs font-black text-[#0A2540] bg-white px-2.5 py-0.5 rounded-lg border border-slate-200">
                       {app.rollNumber}
                     </span>
-                    <span className="text-xs font-bold text-stone-900">{app.studentName}</span>
+                    <span className="text-xs font-bold text-slate-900">{app.studentName}</span>
                   </div>
                   
                   {app.status === "PENDING_CLASS_TEACHER" ? (
@@ -204,15 +204,15 @@ export const TeacherDashboard = () => {
                   )}
                 </div>
 
-                <div className="text-xs text-stone-700 space-y-1">
-                  <p><span className="font-bold text-stone-900">Duration:</span> {app.leaveType} ({app.leaveDate})</p>
-                  <p><span className="font-bold text-stone-900">Timing:</span> {app.fromTime} - {app.toTime}</p>
-                  <p><span className="font-bold text-stone-900">Reason:</span> "{app.reason}"</p>
-                  <p><span className="font-bold text-stone-900">Parent Contact:</span> {app.parentName} ({app.parentPhone})</p>
+                <div className="text-xs text-slate-700 space-y-1">
+                  <p><span className="font-bold text-slate-900">Duration:</span> {app.leaveType} ({app.leaveDate})</p>
+                  <p><span className="font-bold text-slate-900">Timing:</span> {app.fromTime} - {app.toTime}</p>
+                  <p><span className="font-bold text-slate-900">Reason:</span> "{app.reason}"</p>
+                  <p><span className="font-bold text-slate-900">Parent Contact:</span> {app.parentName} ({app.parentPhone})</p>
                 </div>
 
                 {app.status === "PENDING_CLASS_TEACHER" && (
-                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-stone-200">
+                  <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-200">
                     <button
                       onClick={() => setRejectAppId(app.id)}
                       className="px-3 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 border border-red-200 rounded-xl text-xs font-bold flex items-center gap-1"
@@ -222,7 +222,7 @@ export const TeacherDashboard = () => {
                     </button>
                     <button
                       onClick={() => handleApprove(app.id)}
-                      className="px-4 py-1.5 bg-[#702424] hover:bg-[#581A1A] text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs"
+                      className="px-4 py-1.5 bg-[#0A2540] hover:bg-[#071C30] text-white rounded-xl text-xs font-bold flex items-center gap-1 shadow-xs"
                     >
                       <Check className="w-3.5 h-3.5" />
                       Approve & Forward to HOD
